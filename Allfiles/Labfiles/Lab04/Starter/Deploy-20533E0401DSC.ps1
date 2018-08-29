@@ -10,14 +10,10 @@ $resourceGroup = Get-AzureRmResourceGroup -Name $resourceGroupName
 
 $storageAccount = Get-AzureRmStorageAccount -ResourceGroupName $resourceGroupName
 If (!($storageAccount)) {
-    $uniqueNumber = Get-Random
-    $saName = $saPrefix + $uniqueNumber 
-    If ((Get-AzureRmStorageAccountNameAvailability -Name $saName).NameAvailable -ne $True) { 
-        Do { 
-            $uniqueNumber = Get-Random
-            $saName = $saPrefix + $uniqueNumber
-        } Until ((Get-AzureRmStorageAccountNameAvailability -Name $saName).NameAvailable -eq $True)
-    } 
+    Do { 
+        $uniqueNumber = Get-Random
+        $saName = $saPrefix + $uniqueNumber
+    } Until ((Get-AzureRmStorageAccountNameAvailability -Name $saName).NameAvailable -eq $True)
     $storageAccount = New-AzureRmStorageAccount -ResourceGroupName $resourceGroupname -Name $saName -Type $saType -Location $resourceGroup.Location
 }
 
