@@ -19,5 +19,6 @@ $rootPath = (Get-Item $PSScriptRoot).Parent.Parent.FullName
 $sourceFolder = Join-Path -Path $rootPath -ChildPath 'Lab06\Starter\invoices'
 
 # Upload each file in the local folder to the directory in the share
+# Set the value for $files
 $files = Get-ChildItem -Path $sourceFolder -File
 foreach ($file in $files) { Set-AzureStorageFileContent -Share $share -Source "$sourcefolder\$file" -Path $directoryName -Verbose}
